@@ -210,7 +210,7 @@ $(function() {
 	
     // 10. forms
     // 10.1. contact form
-    $("form#form").on("submit", function() {
+   /* $("form#form").on("submit", function() {
         $("form#form .error").remove();
         var s = !1;
         if ($(".requiredField").each(function() {
@@ -234,6 +234,7 @@ $(function() {
         }
         return !1;
     });
+    */
 	
     // 11. clone function
     $.fn.duplicate = function(count, cloneEvents, callback) {
@@ -313,7 +314,7 @@ $(function() {
 
 });
 
-const form = document.getElementById("contact-form");
+const form = document.getElementById("google-form");
 const status = document.getElementById("form-status");
 
 form.addEventListener("submit", async (e) => {
@@ -324,11 +325,12 @@ form.addEventListener("submit", async (e) => {
   const data = {
     name: form.name.value,
     email: form.email.value,
+    subject: form.subject.value,
     message: form.message.value
   };
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
