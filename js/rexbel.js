@@ -343,3 +343,32 @@ form.addEventListener("submit", async (e) => {
     status.textContent = "Hubo un error, probá de nuevo.";
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      nombre: form.nombre.value,
+      mail: form.mail.value,
+      asunto: form.asunto.value,
+      mensaje: form.mensaje.value
+    };
+
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      alert("Mensaje enviado correctamente 🙌");
+      form.reset();
+    } catch (error) {
+      alert("Hubo un error, probá de nuevo.");
+    }
+  });
+});
