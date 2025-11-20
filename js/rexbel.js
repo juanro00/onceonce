@@ -312,3 +312,32 @@ $(function() {
 
 
 });
+
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  status.textContent = "Enviando...";
+
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    message: form.message.value
+  };
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    status.textContent = "Mensaje enviado correctamente 🙌";
+    form.reset();
+  } catch (error) {
+    status.textContent = "Hubo un error, probá de nuevo.";
+  }
+});
