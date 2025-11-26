@@ -208,34 +208,6 @@ $(function() {
         $(".panel-from-left-about, .panel-from-right-about, .panel-overlay-from-left-about, .panel-overlay-from-right-about").removeClass("open");
     });
 	
-    // 10. forms
-    // 10.1. contact form
-   /* $("form#form").on("submit", function() {
-        $("form#form .error").remove();
-        var s = !1;
-        if ($(".requiredField").each(function() {
-                if ("" === jQuery.trim($(this).val())) $(this).prev("label").text(), $(this).parent().append('<span class="error">Tenés que llenar este campo</span>'), $(this).addClass(
-                    "inputError"), s = !0;
-                else if ($(this).hasClass("email")) {
-                    var r = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                    r.test(jQuery.trim($(this).val())) || ($(this).prev("label").text(), $(this).parent().append('<span class="error">Invalid email address</span>'), $(this).addClass(
-                        "inputError"), s = !0);
-                }
-            }), !s) {
-            $("form#form input.submit").fadeOut("normal", function() {
-                $(this).parent().append("");
-            });
-            var r = $(this).serialize();
-            $.post($(this).attr("action"), r, function() {
-                $("form#form").slideUp("fast", function() {
-                    $(this).before('<div class="success">Your email was sent successfully.</div>');
-                });
-            });
-        }
-        return !1;
-    });
-    */
-	
     // 11. clone function
     $.fn.duplicate = function(count, cloneEvents, callback) {
         var stack = [],
@@ -311,64 +283,36 @@ $(function() {
     swipersliderTop.params.control = swipersliderBottom;
     swipersliderBottom.params.control = swipersliderTop;
 
-
 });
 
-const form = document.getElementById("google-form");
-const status = document.getElementById("form-status");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  status.textContent = "Enviando...";
-
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    subject: form.subject.value,
-    message: form.message.value
-  };
-
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-
-    status.textContent = "Mensaje enviado correctamente 🙌";
-    form.reset();
-  } catch (error) {
-    status.textContent = "Hubo un error, probá de nuevo.";
-  }
-});
-
+// 10. Contact form handler
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const data = {
-      nombre: form.nombre.value,
-      mail: form.mail.value,
-      asunto: form.asunto.value,
-      mensaje: form.mensaje.value
-    };
+      const data = {
+        nombre: form.nombre.value,
+        mail: form.mail.value,
+        asunto: form.asunto.value,
+        mensaje: form.mensaje.value
+      };
 
-    try {
-      await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbywYO6DzfoDTEhP8tbkF1bBevLu5nc4dL7lf0zA4ti7hd71RWS3Amjrvmh3xRuOQeRb/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
 
-      alert("Mensaje enviado correctamente 🙌");
-      form.reset();
-    } catch (error) {
-      alert("Hubo un error, probá de nuevo.");
-    }
-  });
+        alert("Mensaje enviado correctamente 🙌");
+        form.reset();
+      } catch (error) {
+        alert("Hubo un error, probá de nuevo.");
+      }
+    });
+  }
 });
