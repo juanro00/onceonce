@@ -4320,22 +4320,51 @@ visibility: hidden;
   box-shadow: none;
 }
 
-#home,
-#home .intro-wrapper,
-#home .center-container-home,
-#home .center-block-home {
-    height: auto !important;
-    min-height: 100vh;
+
+/* Ajustes para pantallas altas (monitores grandes) */
+/* Pantallas medianas en altura (laptops estándar) */
+@media (max-height: 900px) {
+  .logofiesta {
+    padding: 25px;
+    width: 350px;
+  }
 }
 
-@media (max-height: 1080px) {
-    #home {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
+/* Pantallas bajas (laptops pequeños) */
+@media (max-height: 768px) {
+  .logofiesta {
+    padding: 20px;
+    width: 280px;
+  }
+  
+  /* Ocultar el segundo logo (el de hosts) */
+  .logofiesta:nth-of-type(2) {
+    display: none !important;
+  }
 }
 
-#home {
-    height: auto !important;
-    min-height: 100vh !important;
+/* Pantallas muy bajas (netbooks o monitores pequeños) */
+@media (max-height: 650px) {
+  .logofiesta {
+    padding: 15px;
+    width: 220px;
+  }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-height: 550px) {
+  .logofiesta {
+    padding: 10px;
+    width: 180px;
+  }
+  
+  .subtitlehome {
+    font-size: 14px;
+    padding-bottom: 15px;
+  }
+  
+  .buttonentradas {
+    padding: 0.6em 1.5em;
+    font-size: 14px;
+  }
 }

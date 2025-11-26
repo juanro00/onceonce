@@ -184,7 +184,6 @@ $(function() {
         responsiveWidth: 1024,
         autoScrolling: true,
         scrollBar: false,
-        responsiveHeight: 800,
         afterResponsive: function(isResponsive) {}
     });
 	
