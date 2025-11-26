@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        await fetch("https://script.google.com/macros/s/AKfycbw0NwTc3JwFvzrc2ozrm3NxrwIVuT4M4wgR_gqIHhJr-KXYWhLAW-H2xWNYQEnl7_qL/exec", {
+        await fetch("https://script.google.com/macros/s/AKfycbyDYQVSHNi7Y8mmJzBlx2_AicHJ71DEO21g2S7wCrGhSajnsVaF-lP-Dyhs4r04e62U/exec", {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
