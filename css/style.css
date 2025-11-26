@@ -4334,3 +4334,8 @@ visibility: hidden;
         padding-bottom: 40px;
     }
 }
+
+#home {
+    height: auto !important;
+    min-height: 100vh !important;
+}
