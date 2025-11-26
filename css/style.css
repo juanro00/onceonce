@@ -4319,3 +4319,18 @@ visibility: hidden;
   transform: translate(0);
   box-shadow: none;
 }
+
+#home,
+#home .intro-wrapper,
+#home .center-container-home,
+#home .center-block-home {
+    height: auto !important;
+    min-height: 100vh;
+}
+
+@media (max-height: 1080px) {
+    #home {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
