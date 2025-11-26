@@ -288,31 +288,73 @@ $(function() {
 // 10. Contact form handler
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
-
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const data = {
-        nombre: form.nombre.value,
-        mail: form.mail.value,
-        asunto: form.asunto.value,
-        mensaje: form.mensaje.value
-      };
-
-      try {
-        await fetch("https://script.google.com/macros/s/AKfycbyDYQVSHNi7Y8mmJzBlx2_AicHJ71DEO21g2S7wCrGhSajnsVaF-lP-Dyhs4r04e62U/exec", {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        alert("Mensaje enviado correctamente 🙌");
-        form.reset();
-      } catch (error) {
-        alert("Hubo un error, probá de nuevo.");
-      }
-    });
+  
+  if (!form) {
+    console.error("❌ Formulario no encontrado");
+    return;
   }
+  
+  console.log("✅ Formulario encontrado y listo");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log("📤 Enviando formulario...");
+
+    // Validación básica
+    const nombre = form.nombre.value.trim();
+    const mail = form.mail.value.trim();
+    const asunto = form.asunto.value.trim();
+    const mensaje = form.mensaje.value.trim();
+
+    if (!nombre || !mail || !asunto || !mensaje) {
+      alert("⚠️ Por favor completá todos los campos");
+      return;
+    }
+
+    // Validación de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(mail)) {
+      alert("⚠️ Por favor ingresá un email válido");
+      return;
+    }
+
+    // Deshabilitar botón para evitar envíos duplicados
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Enviando...</span>';
+
+    // Preparar datos como FormData
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('mail', mail);
+    formData.append('asunto', asunto);
+    formData.append('mensaje', mensaje);
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxd4lD-bJNT1rVmXuiwDYCk3Mlvcs7s6TlRRZocY49LxqalwdxyD3IYEjScsYyCPU4r/exec",
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+      console.log("✅ Respuesta recibida:", response.status);
+      
+      // Mostrar mensaje de éxito
+      alert("✅ ¡Mensaje enviado correctamente! Te responderemos pronto.");
+      
+      // Limpiar formulario
+      form.reset();
+      
+    } catch (error) {
+      console.error("❌ Error:", error);
+      alert("❌ Hubo un error al enviar el mensaje. Por favor intentá de nuevo o contactanos directamente a onceonce.prd@gmail.com");
+    } finally {
+      // Rehabilitar botón
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
+  });
 });
